@@ -1,0 +1,275 @@
+NEXT.JS
+Next.js es un framework de React para la construcción de sitios y aplicaciones Full Stack, puedes utilizar componentes de React para crear tu sitio y Next.js para características muy especificas y optimizaciones.
+Next.js se encarga de compilar tu aplicación por lo tanto solo te preocupas por crear tu app y no por la configuración
+
+Su principal característica es que se ejecuta React en el servidor
+
+Desde la versión 13; Next.js tiene 2 routers: App y Pages Router.
+Para proyectos nuevos el recomendado es App Router, el equipo de Vercel ha mencionado que no planean eliminar pages Router pero todas las nuevas características de Next.js son agregadas al App Router.
+El Código entre App y Pages Router es muy diferente en especial para nombrar archivos y obtener datos.
+
+- Soporte Nativo de TypeScript
+- Rendering (Estrategias de Renderizado)
+Next.js permite combinar diferentes métodos de renderizado en una misma aplicación según las necesidades de cada sección:
+-Optimización Automática
+Next.js incluye componentes e infraestructura optimizada out-of-the-box para mejorar el rendimiento y las métricas web (Core Web Vitals):
+- App Router
+Introducido a partir de Next.js 13, el App Router es el sistema moderno de enrutamiento basado en la estructura de la carpeta
+
+
+Archivos reservados en NEXT.JS
+
+Con el App Router Next.js agregó una gran cantidad de archivos reservados que cumplen ciertas funciones y dan orden a tus aplicaciones
+Tambien las carpetas forman parte importante de tus proyectos ya que cada carpeta sera una ruta 
+
+Carpetas 
+En Next.Js 
+cada ruta de carpeta se llama segmento 
+ejemplo: /products/new, products(1 segmento), new(otro segmento)
+
+Convenciones
+De archivos(.js, .jsx o .tsx)
+
+layout (Diseño global que comparte una URL o sus segmentos hijos)
+page (Diseño unico para una URL)
+loading (Componente que se muestra mientras carga una pagina con Suspense)
+not-found(Componente que se muestra mientras cuando un recurso no es encontrado - 404
+)
+error (Componente que se muestra cuando hay errores inesperados)
+route (Componente para endpoint de REST API)
+
+No, no hace falta instalar ni configurar una librería de enrutamiento externa (como React Router). Next.js incluye su propio sistema de rutas integrado.
+
+A diferencia de un proyecto tradicional de React donde declaras las rutas mediante código (por ejemplo, con <Route element="{<About" path="/about"/>} />), en Next.js las rutas se crean automáticamente basadas en la estructura de archivos y carpetas
+
+Por default todos los archivos en next js se ejecutan en el servidor pero tambien te permite ejecutar componentes en el cliente esto lo llamamos rendering 
+
+Rendering
+Los Server Components es un nuevo tipo de componente que se renderiza antes de la aplicacion, antes de crear el bundler en un ambiente separado de tu App
+Una de las principales características que tiene Next.js dede que fue lanzado es poder ejecutar codigo de React en el servidor
+En versiones anteriores el mismo codigo se ejecutaba primero en el servidor y despues en el cliente
+
+Server Components
+Desde Next 13 con el app directory, todos los componentes se ejecutan por default en el servidor
+En caso de que sea necesario se puede añadir que un componente sea ejecutado en el cliente con la directiva "use client"
+
+Cuando tienes aplicaciones con componentes de servidor y cliente es muy importante mencionar que el codigo es unidireccional("Unidireccional significa que cuando pasa de servidor a cliente un componente, y de ahí en adelante, todos los componentes que renderice un componente en el cliente van a ser componentes de cliente: no vuelven a ser de servidor. Sus hijos o los componentes que lo renderizan van a ser tambien de cliente no hace falta en el otro componente declarar use client)
+
+SERVER --> CLIENT 
+No puedes tener componentes de cliente que rendericen componentes de servidor, salvo algunas tecnicas llamadas composicion que se utilizan en algunos casos
+
+Si tenemos un componente de servidor ese componente puede mostrar un componente de clietnes o multiples
+Si tengo un componente de servidor y quiero renderizar un componente de cliente e puede pero no se puede dentro de ese componente de cliente renderizar un componente de servidor, existe para esto
+una tecnica llamada composicion pero no se recomienda siempre
+Si lo que se puede hacer es si tenemos un componente de servidor renderizar uno de cliente y adentro de ese otro de cliente
+
+¿Cuando utilizar Server Components?
+Se usa para obtener datos desde un ORM y mostrar informacion
+Ejecutar funciones del servidor y acceder a recursos unicamente en el backend
+Autenticacion, API Keys o Tokens o almacenar una coockie en el servidor
+
+
+¿Cuando utilizar Client Components?
+
+Cuando deseas utilizar eventos o añadir interaccion a tus aplicaciones por medio de un onClick, onSubmit, onChange, etc.
+Si deseas utilizar los hooks de React como useState, useEffect y useReducer, etc
+Utilizar Librerías que no se ejecutan en el servidor como Toast, Zustand u otras que solo funcionan en el cliente
+Utilizar API's del navegador como LocalStorage, Notification API, GeoLocation API, etc
+Consumir datos de una API externa en JSON, en el server se puede pero si vamos a usar un useEffect, axios, react query se va a hacer desde un Client Component
+
+Si o si para que muestre algo la ruta debe tener un page.tsx
+
+Prisma
+ORM Open Source que se puede utilizar con JavaScript o TypeScript
+cuenta con 3 herrramientas
+
+Prisma-Client
+Query builder o la herramienta que te permite consultar tu base de datos, soporta Node.js y TypeScript y se puede utilizar con Next.js sin ningun problema
+
+Prisma Migrate
+Puedes definir tus tablas y relaciones y esta herramienta se encarga de generar toda la base de datos por tiene
+
+Prisma Studio
+Unica herramienta de Prisma que no es Open Source pero se puede utilizar localmente, es para ver tu base de datos
+
+Bases de datos soportadas por Prisma
+MariaDB, SQL Server 2017,2019 y 2022, MongoDB MySql, PostgreSQL, SQLite
+
+NEON es como render pero te permite hasta 30 proyectos totalmente gratis
+
+Crear la base de datos en Prisma
+
+npx prisma contract emit
+npx prisma db update
+npx prisma skills sync
+
+npx prisma db update Se usa este en vez de migrate
+En la nueva version no se usa mas npx prisma studio
+
+Configuración de Prisma 7
+
+El proyecto utiliza Prisma 7.10.0 con PostgreSQL, Next.js y el adapter @prisma/adapter-pg.
+
+Dependencias principales
+
+Se mantienen alineadas las versiones de Prisma:
+
+"@prisma/adapter-pg": "^7.10.0",
+"@prisma/client": "^7.10.0",
+"prisma": "^7.10.0"
+
+Se eliminó @prisma/orm-postgres, ya que pertenecía a la configuración anterior basada en Prisma 8 RC.
+
+prisma.config.ts
+
+La conexión a PostgreSQL se configura mediante DATABASE_URL:
+
+import "dotenv/config";
+import { defineConfig } from "prisma/config";
+
+export default defineConfig({
+  schema: "prisma/schema.prisma",
+
+  migrations: {
+    path: "prisma/migrations",
+  },
+
+  datasource: {
+    url: process.env.DATABASE_URL!,
+  },
+});
+
+La variable DATABASE_URL se encuentra en el archivo .env.
+
+schema.prisma
+
+El proyecto utiliza el generador moderno de Prisma Client:
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+El cliente generado se encuentra en:
+
+src/generated/prisma
+
+El schema contiene las entidades Category y Product, relacionadas mediante categoryId.
+
+Generación del cliente
+
+Después de instalar o modificar las dependencias:
+
+npm install
+
+Se verifica el schema con:
+
+npx prisma validate
+
+Y se genera el cliente con:
+
+npx prisma generate
+
+Si la carpeta src/generated/prisma contiene archivos de una generación anterior incompatible, puede eliminarse y volver a ejecutar:
+
+Remove-Item -Recurse -Force .\src\generated\prisma
+npx prisma generate
+Prisma Client y PostgreSQL
+
+Con Prisma 7 y @prisma/adapter-pg, PrismaClient se inicializa utilizando PrismaPg:
+
+import "dotenv/config";
+import { PrismaPg } from "@prisma/adapter-pg";
+import { PrismaClient } from "@/src/generated/prisma/client";
+
+const adapter = new PrismaPg({
+  connectionString: process.env.DATABASE_URL!,
+});
+
+const prisma = new PrismaClient({ adapter });
+
+A diferencia de versiones anteriores, no se utiliza simplemente:
+
+const prisma = new PrismaClient();
+
+porque el cliente requiere el adapter configurado para la conexión PostgreSQL.
+
+Seed
+
+El seed utiliza createMany() para insertar primero las categorías y posteriormente los productos:
+
+await prisma.category.createMany({
+  data: categories,
+});
+
+await prisma.product.createMany({
+  data: products,
+});
+
+Las categorías deben insertarse antes que los productos porque Product.categoryId posee una relación con Category.id.
+
+El manejo de errores debe permitir que un fallo del seed termine el proceso con código de error:
+
+main()
+  .catch((e) => {
+    console.error("Error durante el seed:", e);
+    process.exit(1);
+  })
+  .finally(async () => {
+    await prisma.$disconnect();
+  });
+Comandos principales
+npm install
+npx prisma validate
+npx prisma generate
+npx prisma migrate dev --name init
+
+Para verificar la versión instalada:
+
+npx prisma -v
+
+Actualmente se utiliza:
+
+prisma        : 7.10.0
+@prisma/client: 7.10.0
+Consideraciones
+
+No se debe utilizar prisma skills sync en esta configuración, ya que el comando skills no está disponible en Prisma 7.
+
+Tampoco se recomienda ejecutar npm audit fix --force sin revisar previamente las vulnerabilidades, ya que puede introducir actualizaciones incompatibles.
+
+
+DATA FETCHING (Obtener Datos)
+
+En Next.Js puede hacerse con 4 formas diferentes:
+
+- En el servidor con fetch
+- En el servidor con un ORM o consultas SQL
+- En el cliente con un Route Handler y una peticion Get 
+- En el cliente con React Query, Axios, SWR u otras opciones
+
+ROUTING DINÁMICO EN NEXT.JS
+
+Muchas veces queremos acceder a un recurso en la base de datos por su ID o slug, ya sea para ver los detalles de un producto, leer una entrada de blog o datos de un cliente
+
+En estos casos se utiliza el routing dinamico
+
+En App Router la forma en la que generas el routing dinamico es con una carpeta y un nombre entre corchetes, ejemplo: [id], [slug],[paymentId]
+
+Ejemplo 
+
+products/ [id] seria /products/1
+
+El params no esta disponible en todos los componentes, solo esta disponible en
+layout.tsx
+page.tsx
+route.tsx
+generateMetadata
+
+Para los otros componentes se usa useParams pero solo es para componentes de cliente
+
+Lo bueno de next que hace las consultas cuando las visita a las paginas si las visita y despues la vuelvo a visitar no la hace de nuevo, va cacheando las consultas previas
