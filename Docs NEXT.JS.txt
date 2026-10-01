@@ -273,3 +273,21 @@ generateMetadata
 Para los otros componentes se usa useParams pero solo es para componentes de cliente
 
 Lo bueno de next que hace las consultas cuando las visita a las paginas si las visita y despues la vuelvo a visitar no la hace de nuevo, va cacheando las consultas previas
+
+Server Actions en Next.Js
+
+Son funciones asincronas que se ejecutan en el servidor, se pueden utilizar con clientes de componentes y servidor
+
+Se utilizar para crear datos y mutarlos y estan muy unidos al configurado
+
+Utilizan la directiva 'use server' que en el caso de componentes de servidor debe ser la primer linea de la funcion, mientras que en client component se deben importar de otro archivo que en la parte superior debe tener esta directiva
+
+Deben estar dentro del atributo action={} de un forma
+
+Tambien pueden ser llamados dentro de un useEffect o al presionar un boton
+
+No son exclusivos de Next.js ya que REact en la version 19 los va a tener incorporados
+
+¡Sí, totalmente! En React actual (especialmente con React 19 y frameworks modernos como Next.js), el uso de Actions (y específicamente los Server Actions) se ha convertido en un estándar moderno para manejar formularios, mutaciones de datos y la comunicación con el servidor de una forma mucho más limpia y directa.
+
+formData.get('name') de esta forma obtenemos los datos del formulario

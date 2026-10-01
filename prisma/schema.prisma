@@ -20,4 +20,24 @@ model Product {
   image      String
   categoryId Int
   category   Category @relation(fields: [categoryId], references: [id])
+  orderItems OrderProducts[]
 }
+
+model Order {
+  id        Int       @id @default(autoincrement())
+  name     String
+  total Float
+  date DateTime @default(now())
+  status Boolean @default(false)
+  orderReadyAt DateTime? //esto es para que cuando el pedido este listo, se guarde la fecha y hora en que se realizo el pedido
+  orderProducts OrderProducts[] //esta es la relacion muchos a muchos entre Order y Product, ya que un pedido puede tener muchos productos y un producto puede estar en muchos pedidos.
+}
+
+model OrderProducts {
+  id   Int   @id @default(autoincrement())
+  orderId   Int
+  order    Order @relation(fields: [orderId], references: [id])
+  productId Int
+  product   Product @relation(fields: [productId], references: [id])
+
+} //esta se hace porque es una relacion muchos a muchos entre Order y Product, ya que un pedido puede tener muchos productos y un producto puede estar en muchos pedidos.

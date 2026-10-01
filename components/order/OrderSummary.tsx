@@ -3,17 +3,25 @@ import { useStore } from "@/src/store"
 import ProductDetails from "./ProductDetails"
 import { useMemo } from "react"
 import { formatCurrency } from "@/src/utils"
+import { createOrder } from "@/actions/create-order-action"
 
 export default function OrderSummary() {
 
   const order = useStore((state) => state.order)
   const total = useMemo(() => order.reduce((total, item) => total + (item.quantity * item.price), 0), [order])
  //Su función principal es reducir todos los elementos de un array a un único valor (que puede ser un número, un string, un objeto o incluso otro arreglo) acumulando un resultado a medida que pasa por cada elemento.
-  return (
+  
+ const handleCreateOrder = async (formData: FormData) => {
+    console.log(formData.get('name'))
+  createOrder() //llamamos a la función que creamos en el archivo de acción
+ }
+ 
+ 
+ return (
 
     <aside className="md:h-screen md:overflow-y-scroll md:w-64 lg:w-96 p-5">
         <h1 className="text-4xl text-center font-black">Mi Pedido</h1>
-        {order.length ===0 ? <p className="text-center my-16">El carrito esta vacio</p> : (
+        {order.length ===0 ? <p className="text-center my-16">El pedido esta vacio</p> : (
           <div className="nt-5">
             {order.map(item => (
               <ProductDetails
@@ -27,6 +35,24 @@ export default function OrderSummary() {
 
             </p>
 
+            <form 
+            className="w-full mt-10 space-y-5"
+            action={handleCreateOrder} //disponibles en los app router, se ejecutan en el servidor y no en el cliente, por lo que no pueden acceder a los datos del cliente, como el estado de la aplicación o las cookies.
+            >
+
+
+              <input type="text" 
+              placeholder="Tu Nombre"
+              className="bg-white border border-gray-100 p-2 w-full"
+              name="name"
+              />
+              <input 
+              type="submit" 
+              className="py-2 rounded uppercase text-white bg-black w-full text-center cursor-pointer font-bold"
+              value='Confirmar Pedido'
+              />
+
+            </form>
           </div>
         )}
 
