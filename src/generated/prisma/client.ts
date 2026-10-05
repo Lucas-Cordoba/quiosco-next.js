@@ -51,3 +51,13 @@ export type Category = Prisma.CategoryModel
  * 
  */
 export type Product = Prisma.ProductModel
+/**
+ * Model Order
+ * 
+ */
+export type Order = Prisma.OrderModel
+/**
+ * Model OrderProducts
+ * 
+ */
+export type OrderProducts = Prisma.OrderProductsModel
