@@ -21,3 +21,10 @@ export const OrderSchema = z.object({
                     .transform((value) => parseInt(value))
                     .refine(value => value > 0, {message: 'Hay errores'}) //para asegurarnos que el id exista y transformarlo a numero 
     })
+
+
+    export const SearchSchema = z.object({
+        search: z.string()
+                    .trim() //trim es una función nativa de JavaScript que se utiliza en cadenas de texto (strings) para eliminar los espacios en blanco de ambos extremos
+                    .min(1, {message: 'La búsqueda no puede ir vacia'})
+    })
