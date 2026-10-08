@@ -298,3 +298,10 @@ actualizar la caché del servidor cuando los datos cambian, sin necesidad de rec
 existen dos tipos
 - Basada en tiempo: La aplicación decide automáticamente actualizar los datos pasado cierto intervalo (por ejemplo, cada 60 segundos).
 - Por botón / evento (On-demand): Ocurre de forma inmediata cuando el usuario realiza una acción específica (como hacer clic en un botón, completar una orden o enviar un formulario)
+
+Para renderizar un componente de servidor  dentro de un componente de cliente (como tu formulario principal), la solución arquitectónica en Next.js es aplicar composición.
+Esto se logra pasando el Server Component como children o como una propiedad (props) desde un componente padre común que sea de servidor, permitiendo que el contenedor interactivo del cliente envuelva el contenido sin romper las reglas de renderizado.
+
+Para imagenes usamos cloudinary es un servicio en la nube especializado en la gestión, almacenamiento, optimización y entrega de archivos multimedia (principalmente imágenes y videos).
+Es gratis hasta ciertos limites, acepta 25 creditos mensuales 25000 transformaciones, 25 GB o 25 GB de transferencia
+Esta libreria solo funciona en Client Components
