@@ -12,7 +12,7 @@ export default function OrdersPage() {
   const url = '/admin/orders/api'
  
   const fetcher = () => fetch(url).then(res => res.json()).then(data => data)
-  const { data, error, isLoading} = useSWR<OrderWithProducts[]>(url, fetcher, {
+  const { data, isLoading} = useSWR<OrderWithProducts[]>(url, fetcher, {
     refreshInterval: 60000, //si le pongo cero no se va a recargar pero si pongo 1000 se va a recargar cada 1 segundo, le ponemos 60000 que es un minuto para que noo haga consulta a la base de datos cada un segundo
     revalidateOnFocus: false //determina si SWR debe volver a pedir los datos a la API automáticamente cuando el usuario vuelve a enfocar la pestaña del navegador, es para que no pida los datos cada vez que recargo la pagina
   }) 

@@ -3,7 +3,6 @@ import { notFound } from "next/navigation"
 import Heading from "@/components/ui/Heading"
 import EditProductForm from "@/components/products/EditProductForm"
 import ProductForm from "@/components/products/ProductForm"
-import Link from "next/link"
 import GoBackButton from "@/components/ui/GoBackButton"
 async function getProductById(id:number) {
     const product = await prisma.product.findUnique({

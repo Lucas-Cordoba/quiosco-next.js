@@ -1,7 +1,6 @@
 import { create } from 'zustand'
 import { OrderItem } from './types'
 import { Product } from './generated/prisma/client'
-import { products } from '@/prisma/data/products'
 
 interface Store {
     order: OrderItem[]
@@ -15,8 +14,13 @@ interface Store {
 export const useStore = create<Store>((set, get) => ({
     order: [],
     addToOrder: (product) => {
+        // Creamos el objeto de datos sin declarar variables huérfanas
+        const data = {
+            id: product.id,
+            name: product.name,
+            price: product.price
+        }
 
-        const { categoryId, image, ...data } = product
         let order: OrderItem[] = []
         if (get().order.find(item => item.id === product.id)) {
             order = get().order.map(item => item.id === product.id ? {
@@ -66,13 +70,4 @@ export const useStore = create<Store>((set, get) => ({
             order: []
         }))
     }
-
-
 }))
-//const (Constante): Se utiliza para valores que no van a cambiar a lo largo del tiempo.
-//let: Se utiliza para variables cuyo valor va a cambiar o ser reasignado más adelante en la ejecución del código
-
-
-/**Lo usas directamente dentro de las funciones de acción que modifican el estado (las que están adentro del create(...)
- get() es una función que te devuelve el estado global actual en cualquier momento dentro de tu store, sin necesidad de estar dentro de un set.
- */

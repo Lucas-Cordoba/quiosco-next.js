@@ -1,5 +1,5 @@
 import { completeOrder } from "@/actions/complete-order-action"
-import { OrderItem, OrderWithProducts } from "@/src/types"
+import { OrderWithProducts } from "@/src/types"
 import { formatCurrency } from "@/src/utils"
 
 type OrderCardProps = {

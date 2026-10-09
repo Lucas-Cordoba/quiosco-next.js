@@ -16,7 +16,7 @@ export default function ImageUpload({image} : {image: string | undefined}) {//pu
             onSuccess={(result, { widget }) => {
                 if (result.event === 'success') {
                     widget.close()
-                    //@ts-ignore es un comentario de directiva que le indica a TypeScript que ignore el siguiente error de tipado en la línea de código posterior.
+                    //@ts-expect-error es un comentario de directiva que le indica a TypeScript que ignore el siguiente error de tipado en la línea de código posterior.
                     setImageUrl(result.info?.secure_url)
                 }
             }} 
