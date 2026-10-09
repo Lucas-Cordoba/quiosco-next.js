@@ -4,8 +4,10 @@ import { CldUploadWidget } from 'next-cloudinary'
 import { useState } from 'react'
 import { TbPhotoPlus } from 'react-icons/tb'
 import Image from 'next/image'
+import { getImagePath } from '@/src/utils'
 
-export default function ImageUpload() {
+
+export default function ImageUpload({image} : {image: string | undefined}) {//puede estar o no
 
     const [imageUrl, setImageUrl] = useState('')
 
@@ -43,11 +45,24 @@ export default function ImageUpload() {
                             </div>
                         )}
                     </div>
-
+                        {image && !imageUrl && ( //esto es para que si no cambiaste la imagen aparezca la actual y si pusiste otra que no se muestre la actual
+                            <div className='space-y-2 flex flex-col items-center'>
+                                <label>Imagen Actual:</label>
+                                <div className='relative w-64 h-64'>
+                                    <Image
+                                        fill
+                                        src={getImagePath(image)}
+                                        alt='Imagen Producto'
+                                        style={{objectFit: 'contain'}}
+                                    />
+                                </div>
+                            </div>
+                        )}
                     <input 
                         type="hidden"
                         name="image"
-                        value={imageUrl} 
+                        defaultValue={imageUrl ? imageUrl : image} //esto es para que ponga la imagen nueva o sino para editar se pone la imagen que ya estaba
+                        //se pone Se usa defaultValue para establecer un valor inicial que el input tendrá cuando se renderice por primera vez, pero permitiendo que cambie o se actualice libremente a medida que el usuario interactúa con la aplicación
                     />
                 </>
             )}

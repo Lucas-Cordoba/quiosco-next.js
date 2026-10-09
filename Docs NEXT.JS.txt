@@ -305,3 +305,14 @@ Esto se logra pasando el Server Component como children o como una propiedad (pr
 Para imagenes usamos cloudinary es un servicio en la nube especializado en la gestión, almacenamiento, optimización y entrega de archivos multimedia (principalmente imágenes y videos).
 Es gratis hasta ciertos limites, acepta 25 creditos mensuales 25000 transformaciones, 25 GB o 25 GB de transferencia
 Esta libreria solo funciona en Client Components
+
+Principio Open Close (Principio Abierto/Cerrado (Open/Closed Principle - OCP))
+
+Las entidades de software (clases, módulos, funciones, etc.) deben estar abiertas para su extensión, pero cerradas para su modificación.
+Abiertas para la extensión: Significa que debes poder añadir nuevas funcionalidades o comportamientos al sistema de manera sencilla.
+Cerradas para la modificación: Significa que para hacer esos cambios no deberías tener que alterar el código fuente que ya está escrito, probado y funcionando
+
+
+SWR es parecido a React Query
+gestionar, cachear y sincronizar datos del servidor en aplicaciones de React de forma eficiente, evitando que tengas que escribir código repetitivo con useEffect y fetch manualmente.
+Solo funciona en el Cliente y requiere un endpoint de una API
